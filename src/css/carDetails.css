@@ -1,0 +1,484 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+button {
+    all: unset;
+    display: block;
+    width: 100%;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* для мобильных */
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.button:focus {
+    outline: none;
+}
+
+button:active {
+    opacity: 0.7;
+}
+
+.car-details {
+    background: #030003;
+    /* padding: 16px; */
+    color: white;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+}
+
+.car-details h2 {
+    font-size: 22px;
+    margin: 0;
+    text-align: center;
+}
+
+.car-top-box {
+    /* background: #1b1b1b; */
+    background: radial-gradient(circle at top left, #232323, #101010);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 0 0 25px 25px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    padding-top: 18vh;
+}
+
+.car-top-box .details-image {
+    width: 80%;
+    border-radius: 16px 16px 0 0;
+    /* margin-bottom: 12px; */
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.top-info {
+    padding: 12px 16px 16px 16px;
+    text-align: center;
+    margin-top: 14px;
+}
+
+.top-info h2 {
+    font-size: 22px;
+    margin: 0;
+    font-weight: 500;
+}
+
+.top-info .car-price {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.top-info .car-accel {
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 8px;
+    margin-bottom: 14px;
+}
+
+/* Характеристики авто */
+.car-status-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.car-status-row {
+    /* background: #1f1b21; */
+    background: radial-gradient(circle at top left, #232323, #151515);
+    border-radius: 12px;
+    padding: 12px;
+    width: calc(50% - 6px); /* 2 колонки с учётом gap: 12px */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.part-icon {
+    font-size: 18px;
+    line-height: 1;
+    margin-top: 4px;
+}
+
+.part-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    color: #ccc;
+    margin-bottom: 5px;
+}
+
+.part-bar {
+    background: rgba(255, 255, 255, 0.08);
+    height: 7px;
+    border-radius: 6px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.part-fill {
+    height: 100%;
+    border-radius: 6px;
+}
+
+
+/* Кнопка Купить для экрана CarDetails.js */
+.buy-button {
+    background: linear-gradient(135deg, #324ba5, #3f4c7c);
+    width: calc(100% - 60px);
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    border: none;
+    cursor: pointer;
+    /* margin-bottom: 16px; */
+    margin: 16px;
+}
+
+
+/* Для экрана ServiceCarDetails.js */
+.serviced-car-page {
+    background: #030003;
+    min-height: 100vh;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    padding-bottom: 24px;
+}
+
+.repair-panel {
+    margin: 14px 16px 0;
+}
+
+.repair-panel__title {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.repair-icons {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.repair-icon {
+    background: #232323;
+    border-radius: 10px;
+    padding: 10px 8px;
+    display: grid;
+    place-items: center;
+    font-size: 28px;
+    opacity: .75;
+    width: unset;
+}
+
+.repair-icon.is-active {
+    outline: 2px solid #6570ff;
+    opacity: 1;
+}
+
+.repair-icon.is-disabled {
+    opacity: .35;
+}
+
+.repair-meta {
+    display: grid;
+    gap: 6px;
+    margin: 6px 0 10px;
+}
+
+.repair-meta__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+/* .repair-meta__row .label {
+    opacity: .75;
+} */
+
+.repair-meta__row .value {
+    font-weight: 700;
+}
+
+.repair-start {
+    width: 100%;
+    background: #3b4478;
+    border-radius: 12px;
+    padding: 12px 14px;
+    text-align: center;
+    width: calc(100% - 28px);
+    font-weight: 700;
+}
+
+.repair-start.is-disabled {
+    opacity: .5;
+}
+
+/* --- Ремонтный таймер (ServiceCarDetails) --- */
+.repair-job {
+    margin: 14px 16px 0;
+}
+
+.job-card {
+    background: #2f3241;
+    border-radius: 18px;
+    padding: 14px;
+}
+
+.job-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    opacity: .95;
+}
+
+.job-title .icon-repair {
+    vertical-align: middle;
+    margin-bottom: 2px;
+}
+
+.job-icon-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    opacity: .85;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.job-icon-list .job-part {
+    font-size: 20px;
+}
+
+.job-remaining {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.job-remaining-sub {
+    opacity: .8;
+    /* margin-bottom: 12px; */
+}
+
+.job-actions {
+    display: flex;
+    align-items: center;
+    background: #3b4478;
+    border-radius: 14px;
+    padding: 10px 12px;
+}
+
+.job-btn {
+    text-align: center;
+    font-weight: 700;
+    flex: 1;
+}
+
+.job-btn--ad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.job-sep {
+    width: 1px;
+    height: 26px;
+    background: rgba(255,255,255,.2);
+    margin: 0 8px;
+}
+
+
+/* статистика */
+.stats {
+    margin: 14px 16px 0;
+}
+
+.stats__title {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.stats__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+}
+
+.stats__num {
+    font-weight: 700;
+}
+
+.stats__divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, .25);
+    margin: 8px 0;
+}
+
+.stats__net.pos .stats__num {
+    color: #32d76e;
+}
+
+.stats__net.neg .stats__num {
+    color: #ff6b6b;
+}
+
+.sell-button {
+    margin-top: 8px;
+    margin-bottom: 12px;
+    width: 100%;
+    background: #3b4478;
+    border-radius: 12px;
+    padding: 12px 14px;
+    text-align: center;
+    font-weight: 700;
+    width: calc(100% - 28px);
+}
+
+/* —— Модальное окно продажи —— */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 0;
+    padding: 16px;
+    transition: opacity 250ms ease;
+}
+
+.modal-backdrop.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 520px;
+    background: #232323;
+    border: 1px solid #292a30;
+    border-radius: 16px;
+    padding: 16px;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+.modal-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.modal-row { margin-bottom: 12px; }
+
+.price-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 8px;
+}
+
+.pill {
+    font-size: 12px;
+    line-height: 1;
+    padding: 6px 8px;
+    border-radius: 999px;
+    border: 1px solid #3a3b42;
+    color: #c9ccd5;
+}
+.pill--primary {
+    border-color: #5865f2;
+    color: #cfd3ff;
+}
+
+.slider {
+    width: 100%;
+    margin: 6px 0 10px;
+    accent-color: #5865f2; /* для современных браузеров */
+}
+
+.sell-meta { margin-top: 6px; }
+.sell-meta__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 4px 0;
+}
+.sell-meta__num { font-weight: 700; }
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.btn {
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    text-align: center;
+}
+.btn-ghost {
+    background: transparent;
+    border-color: #3a3b42;
+    color: #c9ccd5;
+}
+.btn-primary {
+    background: #5865f2;
+    color: #fff;
+}
+
+/* —— Sale job panel —— */
+.sale-job .job-card {
+    margin: 12px 16px;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid #2a2b31;
+    background: #17181d;
+    text-align: center;
+}
+.sale-job .job-title {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px;
+    font-weight: 700; margin-bottom: 8px;
+}
+.sale-job .job-remaining { font-size: 20px; font-weight: 800; }
+.sale-job .job-remaining-sub { opacity: .7; margin-bottom: 8px; }
+.sale-job .job-meta { opacity: .9; }
+
+.modal-footer-stats {
+    margin-top: 8px;
+    border-top: 1px solid #2f3137;
+    padding-top: 8px;
+}
+
+.sell-meta__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 4px 0;
+}
+
+.sell-meta__num.pos { color: #00c853; font-weight: 700; }
+.sell-meta__num.neg { color: #ff5252; font-weight: 700; }

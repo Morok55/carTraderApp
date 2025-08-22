@@ -1,0 +1,360 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #030003;
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+button {
+    all: unset;
+    display: block;
+    width: 100%;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* для мобильных */
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.button:focus {
+    outline: none;
+}
+
+button:active {
+    opacity: 0.7;
+}
+
+
+.arcade-canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background: #111;
+    touch-action: none; /* не даём браузеру скроллить при жесте */
+}
+
+/* Заголовок */
+.arcade-header {
+    position: absolute;
+    top: 5vh;
+    left: 40%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+}
+
+.arcade-score {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.mute-btn {
+    position: absolute;
+    top: 9vh;
+    right: 20px;
+    z-index: 26;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    /* background: linear-gradient(135deg, #2b2b2b, #111);
+    border: 1px solid #3c3c3c; */
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    transition: transform 0.1s, background 0.2s;
+}
+.mute-btn:active {
+    transform: scale(0.95);
+}
+
+/* стартовая шторка */
+.start-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.0));
+    display: flex;
+    align-items: flex-end;
+    z-index: 25;
+    pointer-events: auto;
+}
+
+.start-sheet {
+    width: calc(100% - 34px);
+    background: radial-gradient(circle at top left, #2d2d2d, #111);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border: 1px solid rgba(60,60,60,0.6);
+    box-shadow: 0 -8px 30px rgba(0,0,0,0.4);
+    padding: 12px 16px 16px 16px;
+    animation: slideUp 240ms cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30%); opacity: 0; }
+    to   { transform: translateY(0);   opacity: 1; }
+}
+
+.sheet-handle {
+    width: 42px;
+    height: 4px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 999px;
+    margin: 4px auto 10px auto;
+}
+
+.sheet-title {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.coin-upgrade {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+}
+
+.coin-upgrade .coin-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.coin-upgrade .coin-line .dot {
+    opacity: .6;
+}
+
+.coin-upgrade .coin-sub {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #cfcfcf;
+}
+
+.coin-progress {
+    position: relative;
+    margin-top: 8px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.12);
+    overflow: hidden;
+}
+.coin-progress .bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ffd54a, #ffb300);
+    transition: width .25s ease;
+}
+
+.car-list {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 4px 2px 8px 2px;
+}
+
+.car-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 8px;
+    min-width: 220px;
+}
+
+.car-option.selected {
+    outline: 2px solid #5aa9ff;
+    background: rgba(90,169,255,0.12);
+}
+
+.car-option img {
+    width: 84px;
+    height: 56px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.car-option .car-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.car-option .name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.car-option .price {
+    font-size: 13px;
+    color: #cfcfcf;
+    margin-top: 4px;
+}
+
+.car-option .t00100 {
+    font-size: 13px;
+    color: #cfcfcf;
+    margin-top: 2px;
+}
+
+.play-primary {
+    margin-top: 12px;
+    width: calc(100% - 28px);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 14px 14px;
+    border-radius: 12px;
+    border: 1px solid #3c3c3c;
+    background: linear-gradient(135deg, #2b2b2b, #111);
+    font-weight: 700;
+    transition: transform .08s ease, background .2s;
+}
+
+.play-primary:disabled {
+    opacity: .5;
+}
+
+.play-primary:active {
+    transform: translateY(1px);
+}
+
+
+/* Overlay после проигрыша */
+.gameover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 27;
+}
+
+.overlay-animate {
+    animation: overlayFadeIn 1s ease forwards;
+}
+
+@keyframes overlayFadeIn {
+    from { background: rgba(0,0,0,0.0); }
+    to   { background: rgba(0,0,0,0.7); }
+}
+
+.gameover-box {
+    background: radial-gradient(circle at top left, #2d2d2d, #111);
+    border: 1px solid rgba(60,60,60,0.8);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    color: white;
+    min-width: 280px;
+    opacity: 0;
+    transform: scale(0.96);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    will-change: transform, opacity;
+    position: relative;
+}
+
+.box-animate {
+    animation: boxPopIn 1s cubic-bezier(.2,.8,.2,1) 200ms forwards;
+}
+
+@keyframes boxPopIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.gameover-box h2 {
+    margin: 24px 0 12px 0;
+    font-size: 24px;
+}
+
+.gameover-box p {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+}
+
+.arcade-balance-pill {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 6px 10px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    /* backdrop-filter: blur(2px); */
+
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.arcade-balance-pill strong {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.play-again-btn {
+    background: linear-gradient(135deg, #2b2b2b, #111);
+    color: white;
+    border: 1px solid #3c3c3c;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: unset;
+    margin-left: auto;
+    margin-right: auto;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* для мобильных */
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.play-again-btn:active {
+    background: linear-gradient(135deg, #3a3a3a, #222);
+    opacity: 0.7;
+}
+
+.exit-btn {
+    margin-top: 6px;
+    /* background: linear-gradient(135deg, #111, #333); */
+    color: red;
+    /* border: 1px solid #444; */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: unset;
+    margin-left: auto;
+    margin-right: auto;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* для мобильных */
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.exit-btn:active {
+    background: linear-gradient(135deg, #222, #444);
+    opacity: 0.8;
+}

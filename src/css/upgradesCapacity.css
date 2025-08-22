@@ -1,0 +1,236 @@
+.screen-stack {
+    height: 100vh;
+}
+
+.upg-screen {
+    height: 100vh;
+}
+
+/* Контейнеры экранов — цвета фона уже заданы выше */
+.upg--service {
+    background: #1D1C21;
+    color: white;
+}
+.upg--showroom {
+    background: #9d9d97;
+    color: #111;
+}
+
+/* Хедер: 16:9, фото растянуто на всю ширину */
+.upg-hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    /* без явной высоты — подстраивается по ширине */
+}
+
+/* Фото — через ::before, уже есть */
+.upg-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+    filter: brightness(0.9);
+}
+
+.upg-hero--service::before {
+    background-image: url("../img/upgrade_service.jpg");
+}
+
+.upg-hero--showroom::before {
+    background-image: url("../img/upgrade_showroom.jpg");
+}
+
+/* Плавный перелив ИМЕННО в цвет фона */
+.upg-hero--service::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 60%, #1D1C21 100%);
+}
+.upg-hero--showroom::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 60%, #9d9d97 100%);
+}
+
+/* Заголовок по центру, отступ сверху 5vh */
+.upg-hero-title {
+    position: absolute;
+    top: 4vh;               /* вместо bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;          /* margin-top тут не нужен — позиционируем через top */
+    font-size: 20px;
+    font-weight: 700;
+    z-index: 2;
+    text-align: center;
+    white-space: nowrap;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 8px 16px;
+    border-radius: 16px;
+}
+
+/* Кнопки-плитки чуть «заезжают» на картинку */
+.upg-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 12px 20px;
+    margin-top: -40px;      /* лёгкий «заезд» на фото */
+}
+
+/* Карточка-опция */
+.uopt-card {
+    width: calc(100% - 28px);
+    border-radius: 16px;
+    padding: 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    gap: 6px 10px;
+    text-align: left;
+    transition: transform 0.06s ease, opacity 0.2s ease;
+}
+
+/* «Закрыто из-за недостатка средств»: яркая плитка, но с понятным контуром и курсором */
+.uopt-card.is-locked {
+    cursor: not-allowed;
+    position: relative;
+}
+
+/* .uopt--showroom.uopt-card.is-locked {
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,0.18);
+} */
+
+/* опционально — маленький бейдж в углу (если захочешь — оставь, иначе можешь удалить) */
+.uopt-card.is-locked::before {
+    content: "Недостаточно средств";
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 6px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.28);
+    color: #fff;
+}
+
+.uopt--showroom.uopt-card.is-locked::before {
+    background: rgba(0,0,0,0.18);
+    color: #111;
+}
+
+.uopt-card:active {
+    transform: scale(0.99);
+}
+
+.uopt--service {
+    background: rgba(42, 53, 82, 0.5);
+}
+
+.uopt--showroom {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Иконки слева сверху (1-3 штуки) */
+.uopt-icons {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    display: flex;
+    gap: 6px;
+}
+
+.uopt-ico {
+    opacity: 0.9;
+    width: 17px;
+    height: 17px;
+}
+
+/* Заголовок и подписи */
+.uopt-title {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.uopt-places {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* Цена справа по центру */
+.uopt-price {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.uopt-badge {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.25);
+}
+
+.uopt--showroom .uopt-badge {
+    background: rgba(0,0,0,0.15);
+    color: #111;
+}
+
+.upg-progress {
+    border-radius: 16px;
+    padding: 14px;
+    margin: 0 12px 20px;
+}
+
+.upg-progress--service {
+    background: rgba(42, 53, 82, 0.5);
+}
+
+.upg-progress--showroom {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.upg-prog-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.upg-prog-ico {
+    width: 16px;
+    height: 16px;
+    opacity: 0.9;
+}
+
+.upg-prog-title {
+    font-size: 16px;
+}
+
+.upg-prog-time {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.upg-prog-sub {
+    font-size: 12px;
+    opacity: 0.85;
+}
+

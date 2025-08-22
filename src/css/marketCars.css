@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+button {
+    all: unset;
+    display: block;
+    width: 100%;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* для мобильных */
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.button:focus {
+    outline: none;
+}
+
+button:active {
+    opacity: 0.7;
+}
+
+.used-cars-market {
+    padding: 16px;
+    color: white;
+    background: #030003;
+    max-width: 420px;
+    margin: auto;
+}
+
+.market-header {
+    display: flex;
+    align-items: flex-start;
+}
+
+.market-head-left {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* займёт всё доступное пространство слева */
+}
+
+.sort-button {
+    margin-left: auto;
+    border: 1px solid #3a3a3a;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    padding: 6px 8px;   /* только чуть-чуть воздуха */
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1;
+    white-space: nowrap;
+    width: auto;        /* ширина только по тексту */
+    margin-top: calc(10vh + 16px);
+}
+
+.sort-button:active {
+    opacity: 0.7;
+}
+
+/* немного подправим отступы, чтобы кнопка красиво встала справа от заголовка */
+.market-title {
+    margin-bottom: 4px;
+    margin-top: 10vh;
+}
+
+.market-balance {
+    margin-bottom: 6px;
+}
+
+
+.market-price {
+    padding: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.market-price .price-label {
+    color: #9aa0a6;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.market-price input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    border: none;
+    border-bottom: 1px solid #3a3a3a;
+    background: none;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.market-price input::placeholder {
+    color: #9aa0a6;
+}
+
+
+.market-search {
+    padding: 0 0 12px;
+    position: relative;
+}
+
+.market-search .search-icon {
+    position: absolute;
+    left: 5px;       /* отступ от края контейнера */
+    top: 20px;
+    transform: translateY(-50%);
+    color: #9aa0a6;
+    pointer-events: none;
+    font-size: 14px;
+}
+
+.market-search input {
+    width: calc(100% - 46px);
+    padding: 10px 12px 10px 29px;
+    /* border-radius: 12px; */
+    border: none;
+    border-bottom: 1px solid #3a3a3a;
+    background: none;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.market-search input::placeholder {
+    color: #9aa0a6;
+}
+
+.empty-result {
+    padding: 16px;
+    color: #9aa0a6;
+    text-align: center;
+}
+
+.cars-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.car-card {
+    background: #1b1b1b;
+    border-radius: 12px;
+    display: flex;
+    padding: 12px;
+    gap: 12px;
+    align-items: center;
+}
+
+.car-card:active {
+    opacity: 0.7;
+}
+
+.car-image {
+    width: 90px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.car-info {
+    flex: 1;
+}
+
+.car-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.car-condition {
+    font-size: 13px;
+    color: #ccc;
+    margin: 8px 0;
+}
+
+.condition-bar {
+    background: #333;
+    height: 6px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.condition-fill {
+    height: 100%;
+    transition: width 0.3s;
+}
+
+.car-price {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 4px;
+}

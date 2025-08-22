@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.afa31500.css",
+    "main.js": "/static/js/main.e554aa67.js",
+    "static/media/arcade_model_car.png": "/static/media/arcade_model_car.7c113532c89a70114fbd.png",
+    "static/media/opponent_car_4.png": "/static/media/opponent_car_4.a78eeb958f7137311e15.png",
+    "static/media/opponent_car_1.png": "/static/media/opponent_car_1.9e3271706a6e08c21e17.png",
+    "static/media/opponent_car_5.png": "/static/media/opponent_car_5.194be1a92436bf05be35.png",
+    "static/media/opponent_car_6.png": "/static/media/opponent_car_6.d5c4deedea1fa42e091c.png",
+    "static/media/opponent_car_3.png": "/static/media/opponent_car_3.db3cfef7f005d12cd6dc.png",
+    "static/media/upgrade_service.jpg": "/static/media/upgrade_service.10a2c951c7ef4373caac.jpg",
+    "static/media/upgrade_showroom.jpg": "/static/media/upgrade_showroom.30a8449576e08f24fdbc.jpg",
+    "static/media/opponent_car_2.png": "/static/media/opponent_car_2.5fb0e2b35a87d4fbe08b.png",
+    "static/media/crash.mp3": "/static/media/crash.149c4007f3ab326c1817.mp3",
+    "static/media/coin.mp3": "/static/media/coin.9a7c374f4fa3beb8c7dc.mp3",
+    "index.html": "/index.html",
+    "main.afa31500.css.map": "/static/css/main.afa31500.css.map",
+    "main.e554aa67.js.map": "/static/js/main.e554aa67.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.afa31500.css",
+    "static/js/main.e554aa67.js"
+  ]
+}

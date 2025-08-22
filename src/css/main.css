@@ -1,0 +1,609 @@
+* {
+    color: white;
+}
+
+html, body, #root { height: 100%; }
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #030003;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+button {
+    all: unset;
+    display: block;
+    width: 100%;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* для мобильных */
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.button:focus {
+    outline: none;
+}
+
+button:active {
+    opacity: 0.7;
+}
+
+
+/* общий фон = фон приложения, чтобы не мигал чёрный */
+.screen-stack {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #030003; /* тот же, что и у страниц */
+}
+
+/* во время перехода нижний слой не скроллится/не ловит клики */
+.screen-stack.is-transitioning .screen-under {
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Низ — в потоке! задаёт естественную высоту экрана */
+.screen-under {
+    position: relative;
+    background: #030003;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Верх — абсолютный, едет поверх */
+.screen-over {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    background: #030003;
+    z-index: 1;
+    will-change: transform, opacity;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* ваши уже существующие классы направлений */
+.no-anim { animation: none !important; }
+
+.enter-from-right {
+    animation: slideFromRight 150ms ease-out both;
+}
+
+.enter-from-left {
+    animation: slideFromLeft 150ms ease-out both;
+}
+
+@keyframes slideFromRight {
+    from { transform: translateX(100%); opacity: 0.01; }
+    to   { transform: translateX(0);     opacity: 1; }
+}
+
+@keyframes slideFromLeft {
+    from { transform: translateX(-30%); opacity: 0.01; }
+    to   { transform: translateX(0);     opacity: 1; }
+}
+
+/* новые — для нижнего слоя */
+.leave-to-right { animation: leaveToRight 150ms ease-out both; }
+.leave-to-left  { animation: leaveToLeft  150ms ease-out both; }
+
+@keyframes leaveToRight {
+    from { transform: translateX(0);     opacity: 1; }
+    to   { transform: translateX(100%);  opacity: .01; }
+}
+@keyframes leaveToLeft {
+    from { transform: translateX(0);     opacity: 1; }
+    to   { transform: translateX(-30%);  opacity: .01; }
+}
+
+
+.header {
+    position: relative;
+    background: radial-gradient(circle at top left, #2d2d2d, #030003);
+    padding-top: calc(10vh + 120px);
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 16px;
+}
+
+
+/* Кнопка настроек — абсолют справа */
+.settings-btn {
+    position: absolute;
+    top: calc(10px + 8vh);
+    right: 10px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    width: unset;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* для мобильных */
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.settings-btn:active {
+    opacity: 0.7;
+}
+
+.play-button-top-left {
+    position: absolute;
+    top: calc(10px + 8vh);
+    left: 10px;
+    width: unset;
+    background: linear-gradient(135deg, #2b2b2b, #111);
+    color: white;
+    border: 1px solid #3c3c3c;
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* для мобильных */
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.play-button-top-left:active {
+    background: linear-gradient(135deg, #222, #333);
+    opacity: 0.7;
+}
+
+.play-button-top-left .icon-play {
+    vertical-align: middle;
+    margin-bottom: 2px; /* лёгкое смещение вниз */
+}
+
+/* Центрированный блок */
+.header-center {
+    position: absolute;
+    top: calc(20px + 8vh);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+/* Иконка */
+.icon-header {
+    font-size: 50px;
+    display: block;
+    margin: 0 auto 4px auto;
+}
+
+/* Заголовок */
+.header-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.balance-box {
+    background: radial-gradient(circle at top left, #313131, #161616);
+    width: 75%;
+    margin: -40px auto 16px auto;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(47, 47, 47, 0.8);
+    box-shadow:
+        -4px -4px 12px rgba(255, 255, 255, 0.1),
+        0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.balance-box h1 {
+    margin: 0;
+    font-size: 38px;
+}
+
+.balance-box .text-balance-box {
+    font-size: 15px;
+    margin-top: 5px;
+    color: #a2a2a2;
+}
+
+
+/* Автосервис */
+.section.service-box {
+    background: radial-gradient(circle at top left, #232323, #0f0f0f);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    position: relative;
+    padding: 32px 16px 16px 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* «Таб» заголовка */
+.section-header {
+    position: absolute;
+    top: 0px;
+    left: 27%;
+    background: #303030;
+    padding: 10px 30px;
+    border-radius: 0px 0px 10px 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Тело блока */
+.service-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 16px;
+}
+
+/* Обёртка круга + прогресс */
+.circle-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: 155px;
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+/* Внешний прогресс */
+.circle-progress-ring {
+    position: absolute;
+    inset: -10px; /* Расширяем за пределы внутреннего круга */
+    left: -10px;
+    top: -10px;
+    border-radius: 50%;
+    background: conic-gradient(
+        rgba(255, 255, 255, 0.4) var(--percent, 0%),  /* зелёный прогресс */
+        rgba(255, 255, 255, 0.06) 0% /* "пустой" участок */
+    );
+    z-index: 0;
+    aspect-ratio: 1 / 1;
+}
+
+/* Внутренний круг с текстом */
+.circle {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    /* border: 12px solid rgba(255, 255, 255, 0.03); */
+    background: radial-gradient(circle at top left, #1F1F1F, #171717);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    text-align: center;
+    z-index: 1;
+}
+
+
+
+/* Информация справа */
+.service-body .service-info {
+    flex: 0 0 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 16px;
+    color: #ccc;
+}
+
+/* Строка: иконка + текст */
+.info-row {
+    display: flex;
+    align-items: stretch; /* иконка тянется по высоте текста */
+    gap: 8px;
+    border-bottom: 1px solid rgb(45, 45, 45);
+    padding-bottom: 6px;
+}
+
+/* Иконка */
+.info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    padding: 0 2px 0 6px;
+    background: none;
+}
+/* Текст справа от иконки */
+.info-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.info-text .text {
+  color: #ccc;
+}
+
+/* Значение под названием */
+.info-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin-top: 2px;
+}
+
+
+/* Выставочный зал */
+.section.showroom-box {
+    background: linear-gradient(135deg, #112b3f, #0a0a0a);
+    padding: 16px;
+    width: calc(100% - 32px);
+    color: white;
+    /* margin: 20px auto; */
+}
+
+/* Заголовок */
+.showroom-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    margin-top: 6px;
+}
+
+/* Верхние 2 блока */
+.showroom-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.info-box {
+    flex: 1;
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.left-box {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.right-box {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.info-value {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: white;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Нижняя часть */
+.showroom-bottom {
+    display: flex;
+    justify-content: center;
+}
+
+.price-box {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 12px 16px;
+    gap: 12px;
+    width: 100%;
+}
+
+.price-icon {
+    margin-top: 8px;
+    font-size: 30px;
+}
+
+.price-text {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Нижняя часть */
+.button-grid {
+    margin-top: 24px;
+    width: 93%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.button {
+    background: #1b1b1b;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: left;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+/* Верхний блок */
+.half-button {
+    flex: 1;
+    min-width: 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    padding: 10px;
+}
+
+.icon-text-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* расстояние между иконкой и текстом */
+    margin-left: 16px;
+}
+
+.icon-car {
+    font-size: 80px; /* уменьшил под inline-иконку, можешь вернуть 80px при желании */
+}
+
+.text-car {
+    text-align: left;
+    line-height: 1.2;
+}
+
+
+.specialization-button .spec-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.specialization-button .bar {
+    width: 100%;
+    background: #444;
+    border-radius: 6px;
+    height: 6px;
+    margin: 6px 0;
+}
+
+.specialization-button .fill {
+    background: linear-gradient(to right, red, orange);
+    height: 100%;
+    border-radius: 6px;
+}
+
+.specialization-button .spec-subtitle {
+    font-size: 13px;
+    color: #ccc;
+    margin-top: 0;
+}
+
+.specialization-button .spec-hint {
+    font-size: 11px;
+    color: #888;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Нижние кнопки */
+.upgrade-title {
+    margin-bottom: 16px;
+}
+
+.button-grid-3 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.third-button {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    font-size: 16px;
+}
+
+.third-button .icons-grid-3 {
+    font-size: 80px;
+    margin-bottom: 5px;
+}
+
+/* Modal animations (глобально, чтобы работало везде) */
+/* ---- Modal base ---- */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;          /* поверх экранов */
+    display: grid;          /* центрируем карточку */
+    place-items: center;
+    background: rgba(0,0,0,.55);
+}
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 16px;
+    overscroll-behavior: contain; /* не передавать скролл вниз */
+    touch-action: none;           /* блок жести прокрутки/зумов */
+}
+
+.modal-card {
+    width: calc(100% - 32px);
+    max-width: 520px;
+    background: #16171c;
+    border: 1px solid #292a30;
+    border-radius: 16px;
+    padding: 16px;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    cursor: default;
+}
+
+/* когда модалка открыта — блокируем скролл всех экранов */
+.modal-open .screen-under,
+.modal-open .screen-over {
+    overflow: hidden !important;
+}
+
+/* ---- Animations ---- */
+.modal-backdrop.fade-in  { animation: backdropIn 220ms ease-out both; }
+.modal-backdrop.fade-out { animation: backdropOut 180ms ease-out both; }
+
+.modal-card.pop-in  { animation: modalIn 220ms ease-out both; }
+.modal-card.pop-out { animation: modalOut 180ms ease-out both; }
+
+@keyframes backdropIn  { from {opacity:0} to {opacity:1} }
+@keyframes backdropOut { from {opacity:1} to {opacity:0} }
+
+@keyframes modalIn  {
+    from { transform: translateY(8px) scale(.5); opacity: 0; }
+    to   { transform: translateY(0)   scale(1);   opacity: 1; }
+}
+@keyframes modalOut {
+    from { transform: translateY(0)   scale(1);   opacity: 1; }
+    to   { transform: translateY(8px) scale(.5); opacity: 0; }
+}
+
+
+

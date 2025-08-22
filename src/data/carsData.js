@@ -1,0 +1,63 @@
+// Базовый список
+const ALL = [
+    { id: 1,  brand: "BMW",           model: "3 Series G20",        image: "/img/mass/bmw_3_g20.png",            imageArcade: "/img/car_arcade_blue.png",   basePrice: 33000, arcadeAccel: 1.18 },
+    { id: 2,  brand: "Mercedes-Benz", model: "C-Class W205",        image: "/img/mass/mercedes_c_w205.png",      imageArcade: "/img/car_arcade_gray.png",   basePrice: 34000, arcadeAccel: 1.16 },
+    { id: 3,  brand: "Audi",          model: "A4 B9",               image: "/img/mass/audi_a4_b9.png",           imageArcade: "/img/car_arcade_black.png",  basePrice: 32000, arcadeAccel: 1.12 },
+    { id: 4,  brand: "Tesla",         model: "Model 3",             image: "/img/mass/tesla_model3.png",         imageArcade: "/img/car_arcade_white.png",  basePrice: 35000, arcadeAccel: 1.35 },
+    { id: 5,  brand: "Volkswagen",    model: "Arteon",              image: "/img/mass/vw_arteon.png",            imageArcade: "/img/car_arcade_yellow.png", basePrice: 33000, arcadeAccel: 1.10 },
+    { id: 6,  brand: "Mazda",         model: "CX-5 Signature",      image: "/img/mass/mazda_cx5.png",            imageArcade: "/img/car_arcade_blue.png",   basePrice: 31000, arcadeAccel: 0.98 },
+    { id: 7,  brand: "Toyota",        model: "RAV4 Hybrid",         image: "/img/mass/toyota_rav4_hybrid.png",   imageArcade: "/img/car_arcade_gray.png",   basePrice: 31000, arcadeAccel: 1.04 },
+    { id: 8,  brand: "Honda",         model: "Accord",              image: "/img/mass/honda_accord.png",         imageArcade: "/img/car_arcade_blue.png",   basePrice: 23000, arcadeAccel: 1.05 },
+    { id: 9,  brand: "Toyota",        model: "Camry",               image: "/img/mass/toyota_camry.png",         imageArcade: "/img/car_arcade_white.png",  basePrice: 24000, arcadeAccel: 1.04 },
+    { id:10,  brand: "Hyundai",       model: "Sonata",              image: "/img/mass/hyundai_sonata.png",       imageArcade: "/img/car_arcade_red.png",    basePrice: 21000, arcadeAccel: 1.00 },
+    { id:11,  brand: "Kia",           model: "Optima",              image: "/img/mass/kia_optima.png",           imageArcade: "/img/car_arcade_white.png",  basePrice: 20000, arcadeAccel: 0.99 },
+    { id:12,  brand: "Subaru",        model: "Legacy",              image: "/img/mass/subaru_legacy.png",        imageArcade: "/img/car_arcade_blue.png",   basePrice: 22000, arcadeAccel: 1.00 },
+    { id:13,  brand: "Mazda",         model: "Mazda6",              image: "/img/mass/mazda_6.png",              imageArcade: "/img/car_arcade_gray.png",   basePrice: 22000, arcadeAccel: 1.02 },
+    { id:14,  brand: "Ford",          model: "Fusion",              image: "/img/mass/ford_fusion.png",          imageArcade: "/img/car_arcade_red.png",    basePrice: 21000, arcadeAccel: 1.00 },
+    { id:15,  brand: "Volkswagen",    model: "Passat",              image: "/img/mass/vw_passat.png",            imageArcade: "/img/car_arcade_white.png",  basePrice: 20000, arcadeAccel: 0.98 },
+    { id:16,  brand: "Nissan",        model: "Altima",              image: "/img/mass/nissan_altima.png",        imageArcade: "/img/car_arcade_gray.png",   basePrice: 23000, arcadeAccel: 1.00 },
+    { id:17,  brand: "Honda",         model: "Civic",               image: "/img/mass/honda_civic.png",          imageArcade: "/img/car_arcade_gray.png",   basePrice: 14000, arcadeAccel: 1.01 },
+    { id:18,  brand: "Hyundai",       model: "Elantra",             image: "/img/mass/hyundai_elantra.png",      imageArcade: "/img/car_arcade_blue.png",   basePrice: 13000, arcadeAccel: 0.99 },
+    { id:19,  brand: "Chevrolet",     model: "Cruze",               image: "/img/mass/chevrolet_cruze.png",      imageArcade: "/img/car_arcade_red.png",    basePrice: 12000, arcadeAccel: 0.97 },
+    { id:20,  brand: "Nissan",        model: "Sentra",              image: "/img/mass/nissan_sentra.png",        imageArcade: "/img/car_arcade_red.png",    basePrice: 11000, arcadeAccel: 0.96 },
+    { id:21,  brand: "Ford",          model: "Focus",               image: "/img/mass/ford_focus.png",           imageArcade: "/img/car_arcade_white.png",  basePrice: 10000, arcadeAccel: 0.98 },
+    { id:22,  brand: "Volkswagen",    model: "Jetta",               image: "/img/mass/vw_jetta.png",             imageArcade: "/img/car_arcade_white.png",  basePrice: 15000, arcadeAccel: 1.00 },
+    { id:23,  brand: "Mazda",         model: "Mazda3",              image: "/img/mass/mazda_3.png",              imageArcade: "/img/car_arcade_blue.png",   basePrice: 14500, arcadeAccel: 1.02 },
+    { id:24,  brand: "Hyundai",       model: "Accent",              image: "/img/mass/hyundai_accent.png",       imageArcade: "/img/car_arcade_red.png",    basePrice:  8000, arcadeAccel: 0.8 },
+    { id:25,  brand: "Kia",           model: "Rio",                 image: "/img/mass/kia_rio.png",              imageArcade: "/img/car_arcade_blue.png",   basePrice:  9000, arcadeAccel: 0.96 },
+    { id:26,  brand: "Lada",          model: "Samara",              image: "/img/mass/lada_samara.png",          imageArcade: "/img/car_arcade_gray.png",   basePrice:  4200, arcadeAccel: 0.6 },
+    { id:27,  brand: "Lada",          model: "Priora",              image: "/img/mass/lada_priora.png",          imageArcade: "/img/car_arcade_white.png",  basePrice:  6200, arcadeAccel: 0.7 },
+    { id:28,  brand: "Lada",          model: "Granta",              image: "/img/mass/lada_granta.png",          imageArcade: "/img/car_arcade_black.png",  basePrice: 14000, arcadeAccel: 0.75 },
+
+    { id: 29,  brand: "BMW",            model: "M2 Competition",       image: "/img/lux/bmw_m2_competition.png",      imageArcade: "/img/car_arcade_blue.png",    basePrice: 63200,  arcadeAccel: 1.32 },
+    { id: 30,  brand: "Toyota",         model: "GR Supra 3.0",         image: "/img/lux/toyota_gr_supra.png",         imageArcade: "/img/car_arcade_gray.png",   basePrice: 56500,  arcadeAccel: 1.28 },
+    { id: 31,  brand: "Ford",           model: "Mustang Shelby GT500", image: "/img/lux/ford_mustang_gt500.png",      imageArcade: "/img/car_arcade_black.png",   basePrice: 79420,  arcadeAccel: 1.40 },
+    { id: 32,  brand: "Chevrolet",      model: "Corvette Z06",         image: "/img/lux/chevrolet_corvette_z06.png",  imageArcade: "/img/car_arcade_yellow.png",  basePrice: 108000, arcadeAccel: 1.50 },
+    { id: 33,  brand: "Porsche",        model: "718 Cayman GTS 4.0",   image: "/img/lux/porsche_718_cayman_gts.png",  imageArcade: "/img/car_arcade_black.png",    basePrice: 93400,  arcadeAccel: 1.35 },
+    { id: 34,  brand: "Porsche",        model: "911 Carrera",          image: "/img/lux/porsche_911_carrera.png",     imageArcade: "/img/car_arcade_white.png",   basePrice: 114400, arcadeAccel: 1.45 },
+    { id: 35,  brand: "Porsche",        model: "911 GT3",              image: "/img/lux/porsche_911_gt3.png",         imageArcade: "/img/car_arcade_gray.png",    basePrice: 182900, arcadeAccel: 1.65 },
+    { id: 36,  brand: "Nissan",         model: "GT-R Premium",         image: "/img/lux/nissan_gtr_r35.png",          imageArcade: "/img/car_arcade_white.png",   basePrice: 121000, arcadeAccel: 1.50 },
+    { id: 37,  brand: "Audi",           model: "RS5 Coupe",            image: "/img/lux/audi_rs5.png",                imageArcade: "/img/car_arcade_white.png",    basePrice: 78900,  arcadeAccel: 1.34 },
+    { id: 38,  brand: "Audi",           model: "RS7 Sportback",        image: "/img/lux/audi_rs7.png",                imageArcade: "/img/car_arcade_black.png",   basePrice: 127800, arcadeAccel: 1.48 },
+    { id: 39,  brand: "Mercedes-AMG",   model: "C63 S",                image: "/img/lux/mercedes_amg_c63s.png",       imageArcade: "/img/car_arcade_white.png",   basePrice: 86000,  arcadeAccel: 1.36 },
+    { id: 40,  brand: "Mercedes-AMG",   model: "GT R",                 image: "/img/lux/mercedes_amg_gtr.png",        imageArcade: "/img/car_arcade_black.png",   basePrice: 165900, arcadeAccel: 1.55 },
+    { id: 41,  brand: "BMW",            model: "M4 Competition",       image: "/img/lux/bmw_m4_competition.png",      imageArcade: "/img/car_arcade_gray.png",    basePrice: 78700,  arcadeAccel: 1.38 },
+    { id: 42,  brand: "Lexus",          model: "LC 500",               image: "/img/lux/lexus_lc500.png",             imageArcade: "/img/car_arcade_black.png",   basePrice: 102350, arcadeAccel: 1.30 },
+    { id: 43,  brand: "Jaguar",         model: "F-TYPE R",             image: "/img/lux/jaguar_ftype_r.png",          imageArcade: "/img/car_arcade_white.png",   basePrice: 108500, arcadeAccel: 1.42 },
+    { id: 44,  brand: "Aston Martin",   model: "Vantage",              image: "/img/lux/aston_vantage.png",           imageArcade: "/img/car_arcade_black.png",    basePrice: 149900, arcadeAccel: 1.60 },
+    { id: 45,  brand: "Maserati",       model: "MC20",                 image: "/img/lux/maserati_mc20.png",           imageArcade: "/img/car_arcade_white.png",   basePrice: 233500, arcadeAccel: 1.70 },
+    { id: 46,  brand: "McLaren",        model: "Artura",               image: "/img/lux/mclaren_artura.png",          imageArcade: "/img/car_arcade_black.png",   basePrice: 238000, arcadeAccel: 1.75 },
+    { id: 47,  brand: "McLaren",        model: "720S",                 image: "/img/lux/mclaren_720s.png",            imageArcade: "/img/car_arcade_black.png",   basePrice: 310500, arcadeAccel: 1.85 },
+    { id: 48,  brand: "Lamborghini",    model: "Huracán EVO",          image: "/img/lux/lamborghini_huracan_evo.png", imageArcade: "/img/car_arcade_black.png",    basePrice: 262000, arcadeAccel: 1.90 },
+    { id: 49,  brand: "Lamborghini",    model: "Aventador SVJ",        image: "/img/lux/lamborghini_aventador_s.png", imageArcade: "/img/car_arcade_white.png",   basePrice: 500000, arcadeAccel: 2.35 },
+    { id: 50,  brand: "Ferrari",        model: "Roma",                 image: "/img/lux/ferrari_roma.png",            imageArcade: "/img/car_arcade_red.png",     basePrice: 247310, arcadeAccel: 1.80 },
+];
+
+// Разделяем на 3 сегмента по цене (порог можно будет подправить)
+export const carsMass = ALL.filter(c => c.basePrice < 36000);
+export const carsLuxSport = ALL.filter(c => c.basePrice >= 36000 && c.basePrice < 510000);
+export const carsPremium = ALL.filter(c => c.basePrice >= 510000);
+
+// Совместимость: по умолчанию экспортируем полный список как раньше
+const carsData = [...carsMass, ...carsLuxSport, ...carsPremium];
+export default carsData;
