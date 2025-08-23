@@ -37,6 +37,7 @@ button:active {
 .arcade-header {
     position: absolute;
     top: calc(env(safe-area-inset-top, 0px) + 12px); /* от выреза + чуть пикселей */
+    top: calc(constant(safe-area-inset-top) + 12px); /* для старых iOS */
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
