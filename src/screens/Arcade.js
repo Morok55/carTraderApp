@@ -842,9 +842,9 @@ export default function Arcade() {
                 ctx.font        = 'bold 22px Inter, system-ui, sans-serif';
                 ctx.textAlign   = 'center';
                 ctx.textBaseline= 'middle';
-                ctx.shadowColor = 'rgba(0,0,0,0.5)';
-                ctx.shadowBlur  = 6;
-                ctx.shadowOffsetY = 2;
+                // ctx.shadowColor = 'rgba(0,0,0,0.5)';
+                // ctx.shadowBlur  = 6;2
+                // ctx.shadowOffsetY = 2;
                 const txt = f.text || '+10$';
                 ctx.strokeText(txt, f.x, f.y);
                 ctx.fillText(txt, f.x, f.y);

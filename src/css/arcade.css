@@ -36,8 +36,9 @@ button:active {
 /* Заголовок */
 .arcade-header {
     position: absolute;
-    top: 5vh;
-    left: 40%;
+    top: calc(env(safe-area-inset-top, 0px) + 12px); /* от выреза + чуть пикселей */
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 10;
     display: flex;
     align-items: center;
@@ -48,6 +49,7 @@ button:active {
     font-size: 20px;
     font-weight: bold;
 }
+
 
 .mute-btn {
     position: absolute;
