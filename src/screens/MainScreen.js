@@ -275,12 +275,12 @@ function MainScreen() {
                 <div className="button-grid-3">
                     <button className="button third-button" onClick={() => navigate('/upgrade/service')}>
                         <FaScrewdriverWrench className='icons-grid-3' />
-                        <span>Автосервис</span>
+                        <span>Улучшить автосервис</span>
                     </button>
 
                     <button className="button third-button" onClick={() => navigate('/upgrade/showroom')}>
                         <PiGarage className='icons-grid-3' />
-                        <span>Выставочный зал</span>
+                        <span>Улучшить выставочный зал</span>
                     </button>
                 </div>
 
