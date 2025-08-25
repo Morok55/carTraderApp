@@ -90,8 +90,8 @@ export default function Specialization() {
     function startChange(target) {
         if (target === current) return;
         if (pending) return; // пока идёт смена — не стартуем новую
-        // const endAt = Date.now() + 60 * 60 * 1000; // 1 час
-        const endAt = Date.now() + 10 * 1000;
+        const endAt = Date.now() + 10 * 60 * 1000; // 10 минут
+        // const endAt = Date.now() + 10 * 1000;
         const rec = { target, endAt, startedAt: Date.now() };
         setPending(rec);
         writeChange(rec);
@@ -160,7 +160,6 @@ export default function Specialization() {
                                         isSelected ? 'is-selected' : ''
                                     ].join(' ').trim()}
                                     onClick={() => {
-                                        if (seg.key === 'premium') return; // 🚫 запрет на премиум
                                         setSelected(seg.key);
                                     }}
                                 >

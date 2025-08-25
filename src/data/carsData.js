@@ -51,6 +51,25 @@ const ALL = [
     { id: 48,  brand: "Lamborghini",    model: "Huracán EVO",          image: "/img/lux/lamborghini_huracan_evo.png", imageArcade: "/img/car_arcade_black.png",    basePrice: 262000, arcadeAccel: 1.90 },
     { id: 49,  brand: "Lamborghini",    model: "Aventador SVJ",        image: "/img/lux/lamborghini_aventador_s.png", imageArcade: "/img/car_arcade_white.png",   basePrice: 500000, arcadeAccel: 2.35 },
     { id: 50,  brand: "Ferrari",        model: "Roma",                 image: "/img/lux/ferrari_roma.png",            imageArcade: "/img/car_arcade_red.png",     basePrice: 247310, arcadeAccel: 1.80 },
+
+    { id: 51, brand: "Rolls-Royce",   model: "Boat Tail",              image: "/img/premium/rolls_royce_boat_tail.png",     imageArcade: "/img/car_arcade_blue.png",   basePrice: 28000000, arcadeAccel: 1.21 },
+    { id: 52, brand: "Bugatti",       model: "La Voiture Noire",       image: "/img/premium/bugatti_la_voiture_noire.png",  imageArcade: "/img/car_arcade_black.png",  basePrice: 11000000, arcadeAccel: 2.92 },
+    { id: 53, brand: "Pagani",        model: "Zonda HP Barchetta",     image: "/img/premium/pagani_zonda_hp_barchetta.png", imageArcade: "/img/car_arcade_blue.png",   basePrice: 17500000, arcadeAccel: 2.06 },
+    { id: 54, brand: "Bugatti",       model: "Centodieci",             image: "/img/premium/bugatti_centodieci.png",        imageArcade: "/img/car_arcade_white.png",  basePrice: 9000000,  arcadeAccel: 2.92 },
+    { id: 55, brand: "Bugatti",       model: "Divo",                   image: "/img/premium/bugatti_divo.png",              imageArcade: "/img/car_arcade_gray.png",   basePrice: 5800000,  arcadeAccel: 2.92 },
+    { id: 56, brand: "Bugatti",       model: "Chiron Super Sport",     image: "/img/premium/bugatti_chiron_super_sport.png",imageArcade: "/img/car_arcade_blue.png",   basePrice: 3900000,  arcadeAccel: 2.92 },
+    { id: 57, brand: "Bugatti",       model: "Mistral",                image: "/img/premium/bugatti_mistral.png",           imageArcade: "/img/car_arcade_yellow.png", basePrice: 5000000,  arcadeAccel: 2.69 },
+    { id: 58, brand: "Koenigsegg",    model: "Jesko Absolut",          image: "/img/premium/koenigsegg_jesko_absolut.png",  imageArcade: "/img/car_arcade_gray.png",   basePrice: 3400000,  arcadeAccel: 2.69 },
+    { id: 59, brand: "Koenigsegg",    model: "Regera",                 image: "/img/premium/koenigsegg_regera.png",         imageArcade: "/img/car_arcade_blue.png",   basePrice: 2100000,  arcadeAccel: 2.50 },
+    { id: 60, brand: "Rimac",         model: "Nevera",                 image: "/img/premium/rimac_nevera.png",              imageArcade: "/img/car_arcade_blue.png",   basePrice: 2200000,  arcadeAccel: 3.55 },
+    { id: 61, brand: "Mercedes-AMG",  model: "ONE",                    image: "/img/premium/mercedes_amg_one.png",          imageArcade: "/img/car_arcade_white.png",  basePrice: 2700000,  arcadeAccel: 2.41 },
+    { id: 62, brand: "Aston Martin",  model: "Valkyrie",               image: "/img/premium/aston_martin_valkyrie.png",     imageArcade: "/img/car_arcade_gray.png",   basePrice: 3000000,  arcadeAccel: 2.69 },
+    { id: 63, brand: "McLaren",       model: "Speedtail",              image: "/img/premium/mclaren_speedtail.png",         imageArcade: "/img/car_arcade_gray.png",   basePrice: 2250000,  arcadeAccel: 2.41 },
+    { id: 64, brand: "Ferrari",       model: "LaFerrari Aperta",       image: "/img/premium/ferrari_laferrari_aperta.png",  imageArcade: "/img/car_arcade_red.png",    basePrice: 3500000,  arcadeAccel: 2.41 },
+    { id: 65, brand: "Pininfarina",   model: "Battista",               image: "/img/premium/pininfarina_battista.png",      imageArcade: "/img/car_arcade_blue.png",   basePrice: 2200000,  arcadeAccel: 3.76 },
+    { id: 66, brand: "Lamborghini",   model: "Veneno",                 image: "/img/premium/lamborghini_veneno.png",        imageArcade: "/img/car_arcade_gray.png",   basePrice: 4500000,  arcadeAccel: 2.50 },
+    { id: 67, brand: "Hennessey",     model: "Venom F5",               image: "/img/premium/hennessey_venom_f5.png",        imageArcade: "/img/car_arcade_yellow.png", basePrice: 2100000,  arcadeAccel: 2.69 },
+    { id: 68, brand: "W Motors",      model: "Lykan HyperSport",       image: "/img/premium/lykan_hypersport.png",          imageArcade: "/img/car_arcade_red.png",    basePrice: 3400000,  arcadeAccel: 2.50 },
 ];
 
 // Разделяем на 3 сегмента по цене (порог можно будет подправить)
