@@ -1,7 +1,7 @@
 // balance.js
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-export const BALANCE_TEST_KEY = '__test_balance__';
+export const BALANCE_TEST_KEY = '__balance__';
 
 const BalanceContext = createContext(null);
 
