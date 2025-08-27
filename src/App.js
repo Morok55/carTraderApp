@@ -4,6 +4,8 @@ import './css/main.css';
 import carsData from './data/carsData';
 import { BalanceProvider } from './balance';
 import PreloadAssets from './components/PreloadAssets';
+import SplashScreen from './components/SplashScreen';
+import splashLogoUrl from './img/splash_logo.png';
 
 import MainScreen from './screens/MainScreen';
 import UsedCarsMarket from './screens/CarsMarket';
@@ -15,6 +17,17 @@ import Showroom from './screens/ShowRoom';
 import UpgradeServiceCapacity from './screens/UpgradeServiceCapacity';
 import UpgradeShowroomCapacity from './screens/UpgradeShowroomCapacity';
 import Specialization from './screens/Specialization';
+
+// Картинки из src/img, которые должны загрузиться до входа в приложение
+import serviceBgUrl from './img/upgrade_service.jpg';
+import showroomBgUrl from './img/upgrade_showroom.jpg';
+import arcadePlayerPng from './img/arcade_model_car.png';
+import opp1Src from './img/opponent_car_1.png';
+import opp2Src from './img/opponent_car_2.png';
+import opp3Src from './img/opponent_car_3.png';
+import opp4Src from './img/opponent_car_4.png';
+import opp5Src from './img/opponent_car_5.png';
+import opp6Src from './img/opponent_car_6.png';
 
 const ANIM_MS = 150; // синхронизировано с CSS
 
@@ -31,6 +44,98 @@ export default function App() {
     const stackRef = useRef(null);
     const underRef = useRef(null);
     const overRef  = useRef(null);
+
+    const [bootReady, setBootReady] = useState(false);
+    const [splashReady, setSplashReady] = useState(false);
+    const [minDelayPassed, setMinDelayPassed] = useState(false);
+    const [bootProgress, setBootProgress] = useState(0); // 0..1
+
+    function preloadOne(url, onDone) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = img.onerror = () => { onDone && onDone(url); resolve(url); };
+            img.decoding = 'async';
+            img.loading = 'eager';
+            img.src = url;
+        });
+    }
+
+    function buildBootList() {
+        const spec = (localStorage.getItem('specCurrent') || 'mass').trim();
+
+        const urls = new Set();
+
+        // 1) src/img (модульные импорты)
+        [
+            serviceBgUrl, showroomBgUrl,
+            arcadePlayerPng,
+            opp1Src, opp2Src, opp3Src, opp4Src, opp5Src, opp6Src
+        ].forEach(u => urls.add(u));
+
+        // 2) public/img — 6 верхнеуровневых PNG-цветов
+        [
+            '/img/car_arcade_black.png',
+            '/img/car_arcade_blue.png',
+            '/img/car_arcade_gray.png',
+            '/img/car_arcade_red.png',
+            '/img/car_arcade_white.png',
+            '/img/car_arcade_yellow.png'
+        ].forEach(u => urls.add(u));
+
+        // 3) public/img — загружаем только ПАПКУ текущей специализации
+        // Берём пути из carsData.image, которые лежат в /img/{spec}/...
+        (carsData || []).forEach(m => {
+            if (m.image && typeof m.image === 'string' && m.image.startsWith(`/img/${spec}/`)) {
+                urls.add(m.image);
+            }
+        });
+
+        return Array.from(urls);
+    }
+
+    // 1) Сначала дожидаемся логотипа
+    useEffect(() => {
+        const img = new Image();
+        img.onload = () => setSplashReady(true);
+        img.onerror = () => setSplashReady(true); // даже при ошибке покажем fallback
+        img.src = splashLogoUrl;
+    }, []);
+
+    // 2) Когда логотип готов — грузим остальное и держим экран загрузки
+    useEffect(() => {
+        if (!splashReady) return;
+        let aborted = false;
+
+        const urls = buildBootList();
+        const total = urls.length;
+
+        if (total === 0) {
+            setBootProgress(1);
+            setBootReady(true);
+            return;
+        }
+
+        let done = 0;
+        const onDone = () => {
+            done += 1;
+            if (!aborted) setBootProgress(done / total);
+        };
+
+        Promise.all(urls.map(u => preloadOne(u, onDone))).then(() => {
+            if (!aborted) {
+                setBootProgress(1);
+                setBootReady(true);
+            }
+        });
+
+        return () => { aborted = true; };
+    }, [splashReady]);
+
+    // Минимальное время показа сплэша — 1 сек
+    useEffect(() => {
+        const t = setTimeout(() => setMinDelayPassed(true), 1000);
+        return () => clearTimeout(t);
+    }, []);
 
     // направление: PUSH — вперёд (справа→налево), POP/REPLACE — назад
     const animClass =
@@ -194,39 +299,43 @@ export default function App() {
 
     return (
         <BalanceProvider>
-            <PreloadAssets />
-            <div
-                ref={stackRef}
-                className={`screen-stack${transitionLocation ? ' is-transitioning' : ''}`}
-                style={lockHeight ? { height: lockHeight + 'px' } : undefined}
-            >
-                {/* Нижний слой — в потоке, задаёт реальную высоту */}
-                <div ref={underRef} className={`screen-under ${underAnimClass}`}>
-                    {underRoutes}
-                </div>
-
-                {/* Верхний слой — абсолют, едет поверх */}
-                {transitionLocation && (
+            {!(bootReady && minDelayPassed) ? (
+                <SplashScreen logo={splashLogoUrl} progress={bootProgress} />
+            ) : (
+                <>
+                    <PreloadAssets />
                     <div
-                        ref={overRef}
-                        key={transitionLocation.key}
-                        className={`screen-over ${animClass}`}
+                        ref={stackRef}
+                        className={`screen-stack${transitionLocation ? ' is-transitioning' : ''}`}
+                        style={lockHeight ? { height: lockHeight + 'px' } : undefined}
                     >
-                        <Routes location={transitionLocation}>
-                            <Route path="/" element={<MainScreen />} />
-                            <Route path="/market" element={<UsedCarsMarket />} />
-                            <Route path="/market/:id" element={<CarDetails />} />
-                            <Route path="/service" element={<ServiceCenter />} />
-                            <Route path="/service/:id" element={<ServiceCarDetails />} />
-                            <Route path="/showroom" element={<Showroom />} />
-                            <Route path="/arcade" element={<Arcade />} />
-                            <Route path="/upgrade/service" element={<UpgradeServiceCapacity />} />
-                            <Route path="/upgrade/showroom" element={<UpgradeShowroomCapacity />} />
-                            <Route path="/specialization" element={<Specialization />} />
-                        </Routes>
+                        <div ref={underRef} className={`screen-under ${underAnimClass}`}>
+                            {underRoutes}
+                        </div>
+
+                        {transitionLocation && (
+                            <div
+                                ref={overRef}
+                                key={transitionLocation.key}
+                                className={`screen-over ${animClass}`}
+                            >
+                                <Routes location={transitionLocation}>
+                                    <Route path="/" element={<MainScreen />} />
+                                    <Route path="/market" element={<UsedCarsMarket />} />
+                                    <Route path="/market/:id" element={<CarDetails />} />
+                                    <Route path="/service" element={<ServiceCenter />} />
+                                    <Route path="/service/:id" element={<ServiceCarDetails />} />
+                                    <Route path="/showroom" element={<Showroom />} />
+                                    <Route path="/arcade" element={<Arcade />} />
+                                    <Route path="/upgrade/service" element={<UpgradeServiceCapacity />} />
+                                    <Route path="/upgrade/showroom" element={<UpgradeShowroomCapacity />} />
+                                    <Route path="/specialization" element={<Specialization />} />
+                                </Routes>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
+                </>
+            )}
         </BalanceProvider>
     );
 }

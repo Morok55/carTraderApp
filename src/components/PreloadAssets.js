@@ -1,15 +1,9 @@
 import { useEffect } from 'react';
-import serviceBgUrl from '../img/upgrade_service.jpg';
-import showroomBgUrl from '../img/upgrade_showroom.jpg';
+import carsData from '../data/carsData';
 
-// PNG аркады
-import arcadePlayerPng from '../img/arcade_model_car.png';
-import opp1Src from '../img/opponent_car_1.png';
-import opp2Src from '../img/opponent_car_2.png';
-import opp3Src from '../img/opponent_car_3.png';
-import opp4Src from '../img/opponent_car_4.png';
-import opp5Src from '../img/opponent_car_5.png';
-import opp6Src from '../img/opponent_car_6.png';
+function readSpec() {
+    try { return localStorage.getItem('specCurrent') || 'mass'; } catch { return 'mass'; }
+}
 
 function addLink(rel, attrs = {}) {
     try {
@@ -20,31 +14,71 @@ function addLink(rel, attrs = {}) {
     } catch {}
 }
 
-export default function PreloadAssets() {
-    useEffect(() => {
-        const urls = [
-            serviceBgUrl,
-            showroomBgUrl,
-            arcadePlayerPng,
-            opp1Src,
-            opp2Src,
-            opp3Src,
-            opp4Src,
-            opp5Src,
-            opp6Src
-        ];
+function prefetchImages(urls, concurrency = 4) {
+    let i = 0;
+    let inFlight = 0;
 
-        urls.forEach((url) => {
-            addLink('preload', { as: 'image', href: url });
-
+    function spawn() {
+        while (inFlight < concurrency && i < urls.length) {
+            const url = urls[i++];
+            inFlight++;
+            // hint для браузера
+            addLink('prefetch', { as: 'image', href: url, importance: 'low' });
+            // фактическая подгрузка
             try {
                 const img = new Image();
                 img.decoding = 'async';
                 img.loading = 'eager';
-                img.fetchPriority = 'high';
                 img.src = url;
-            } catch {}
+                img.onload = img.onerror = () => {
+                    inFlight--;
+                    spawn();
+                };
+            } catch {
+                inFlight--;
+                spawn();
+            }
+        }
+    }
+
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => spawn(), { timeout: 2000 });
+    } else {
+        setTimeout(spawn, 0);
+    }
+}
+
+export default function PreloadAssets() {
+    useEffect(() => {
+        // Если экономия трафика включена — ничего не догружаем
+        const conn = navigator.connection || navigator.webkitConnection || navigator.mozConnection;
+        const saveData = !!(conn && conn.saveData);
+        const slow = !!(conn && /2g|3g/.test(conn.effectiveType || ''));
+        if (saveData || slow) return;
+
+        const current = readSpec();
+        const others = ['mass', 'lux', 'premium'].filter(s => s !== current);
+
+        const urls = new Set();
+
+        // 6 цветовых PNG — на всякий случай, если сплэш пропущен
+        [
+            '/img/car_arcade_black.png',
+            '/img/car_arcade_blue.png',
+            '/img/car_arcade_gray.png',
+            '/img/car_arcade_red.png',
+            '/img/car_arcade_white.png',
+            '/img/car_arcade_yellow.png'
+        ].forEach(u => urls.add(u));
+
+        // Догружаем модели из двух «чужих» папок
+        (carsData || []).forEach(m => {
+            if (typeof m.image === 'string' && others.some(s => m.image.startsWith(`/img/${s}/`))) {
+                urls.add(m.image);
+            }
         });
+
+        prefetchImages(Array.from(urls), 4);
     }, []);
 
     return null;
