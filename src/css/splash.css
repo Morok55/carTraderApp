@@ -14,13 +14,13 @@
 .splash-logo {
     width: 90vw;
     height: auto;
-    transform: translateY(-4vh); /* смещение чуть выше */
+    /* transform: translateY(-1vh); */
     image-rendering: -webkit-optimize-contrast;
 }
 
 /* прогресс-бар под логотипом */
 .splash-progress {
-    width: 85vw;
+    width: 84vw;
     height: 20px;
     border-radius: 10px;
     background: rgba(255,255,255,0.08);
@@ -45,7 +45,9 @@
     transform: translateY(-50%);
     transform: translateX(-50%);
     font-size: 18px;
-    color: rgba(255,255,255,0.85);
+    /* color: rgba(255,255,255,0.85); */
+    color: #cd9d56;
+    font-weight: bold;
     pointer-events: none;
     user-select: none;
 }

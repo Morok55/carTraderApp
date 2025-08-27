@@ -5,7 +5,6 @@ import carsData from './data/carsData';
 import { BalanceProvider } from './balance';
 import PreloadAssets from './components/PreloadAssets';
 import SplashScreen from './components/SplashScreen';
-import splashLogoUrl from './img/splash_logo.png';
 
 import MainScreen from './screens/MainScreen';
 import UsedCarsMarket from './screens/CarsMarket';
@@ -93,12 +92,9 @@ export default function App() {
         return Array.from(urls);
     }
 
-    // 1) Сначала дожидаемся логотипа
     useEffect(() => {
-        const img = new Image();
-        img.onload = () => setSplashReady(true);
-        img.onerror = () => setSplashReady(true); // даже при ошибке покажем fallback
-        img.src = splashLogoUrl;
+        // Логотип мы уже подгружаем в index.html, поэтому сразу запускаем прелоад ассетов
+        setSplashReady(true);
     }, []);
 
     // 2) Когда логотип готов — грузим остальное и держим экран загрузки
@@ -300,7 +296,7 @@ export default function App() {
     return (
         <BalanceProvider>
             {!(bootReady && minDelayPassed) ? (
-                <SplashScreen logo={splashLogoUrl} progress={bootProgress} />
+                <SplashScreen logo={"/img/splash_logo.png"} progress={bootProgress} />
             ) : (
                 <>
                     <PreloadAssets />

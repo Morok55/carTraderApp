@@ -6,22 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <title>Car Trader</title>
-    <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
+    <script id="tgwa" src="https://telegram.org/js/telegram-web-app.js?59"></script>
+
     <script>
-      if (window.Telegram && window?.Telegram?.WebApp) {
-            var app = window.Telegram.WebApp;
-            app.ready();
-            app.expand();
-            // app.isClosingConfirmationEnabled = true;
-            app.isVerticalSwipesEnabled = false;
-            app.disableVerticalSwipes();
-            app.requestFullscreen();
-        }
+        (function () {
+            var LOGO_URL = "/img/splash_logo.png";  // положи логотип в public/img/splash_logo.png
+            var tgLoaded = false;
+            var logoLoaded = false;
+            var called = false;
+
+            function maybeReady() {
+                if (called) return;
+                if (tgLoaded && logoLoaded) {
+                    called = true;
+                    try {
+                        var app = window.Telegram && window.Telegram.WebApp;
+                        if (app && typeof app.ready === "function") {
+                            app.ready();
+                            app.expand();
+                            app.isVerticalSwipesEnabled = false;
+                            app.disableVerticalSwipes();
+                            app.requestFullscreen();
+                        }
+                    } catch (e) {}
+                }
+            }
+
+            // 1) дождаться загрузки TG-скрипта
+            var tgScript = document.getElementById("tgwa");
+            if (tgScript) {
+                if (tgScript.readyState === "complete") {
+                    tgLoaded = true;
+                    maybeReady();
+                } else {
+                    tgScript.addEventListener("load", function () {
+                        tgLoaded = true;
+                        maybeReady();
+                    });
+                }
+            }
+
+            // 2) заранее подгрузить логотип сплэша
+            var img = new Image();
+            img.onload = function () { logoLoaded = true; maybeReady(); };
+            img.onerror = function () { logoLoaded = true; maybeReady(); };
+            img.decoding = "async";
+            img.loading = "eager";
+            img.src = LOGO_URL;
+
+            // 3) фолбэк: если что-то не сработало, не держим пользователя бесконечно
+            setTimeout(function () {
+                if (!called) {
+                    logoLoaded = true;
+                    tgLoaded = !!(window.Telegram && window.Telegram.WebApp);
+                    maybeReady();
+                }
+            }, 1500);
+        })();
     </script>
   </body>
 </html>
