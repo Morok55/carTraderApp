@@ -30,7 +30,7 @@ const ALL = [
     { id:28,  brand: "Lada",          model: "Granta",              image: "/img/mass/lada_granta.png",          imageArcade: "/img/car_arcade_black.png",  basePrice: 14000, arcadeAccel: 0.75 },
 
     { id: 29,  brand: "BMW",            model: "M2 Competition",       image: "/img/lux/bmw_m2_competition.png",      imageArcade: "/img/car_arcade_blue.png",    basePrice: 63200,  arcadeAccel: 1.32 },
-    { id: 30,  brand: "Toyota",         model: "GR Supra 3.0",         image: "/img/lux/toyota_gr_supra.png",         imageArcade: "/img/car_arcade_gray.png",   basePrice: 56500,  arcadeAccel: 1.28 },
+    { id: 30,  brand: "Toyota",         model: "GR Supra 3.0",         image: "/img/lux/toyota_gr_supra.png",         imageArcade: "/img/car_arcade_black.png",   basePrice: 56500,  arcadeAccel: 1.28 },
     { id: 31,  brand: "Ford",           model: "Mustang Shelby GT500", image: "/img/lux/ford_mustang_gt500.png",      imageArcade: "/img/car_arcade_black.png",   basePrice: 79420,  arcadeAccel: 1.40 },
     { id: 32,  brand: "Chevrolet",      model: "Corvette Z06",         image: "/img/lux/chevrolet_corvette_z06.png",  imageArcade: "/img/car_arcade_yellow.png",  basePrice: 108000, arcadeAccel: 1.50 },
     { id: 33,  brand: "Porsche",        model: "718 Cayman GTS 4.0",   image: "/img/lux/porsche_718_cayman_gts.png",  imageArcade: "/img/car_arcade_black.png",    basePrice: 93400,  arcadeAccel: 1.35 },
