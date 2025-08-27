@@ -27,8 +27,8 @@ button:active {
     padding: 16px;
     color: white;
     background: #030003;
-    max-width: 420px;
-    margin: auto;
+    /* max-width: 420px;
+    margin: auto; */
 }
 
 .market-header {

@@ -93,8 +93,20 @@ export default function App() {
     }
 
     useEffect(() => {
-        // Логотип мы уже подгружаем в index.html, поэтому сразу запускаем прелоад ассетов
-        setSplashReady(true);
+        let cancelled = false;
+        (async () => {
+            try {
+                const img = new Image();
+                img.src = '/img/splash_logo.png';   // тот же путь, что в <SplashScreen />
+                if (img.decode) {
+                    await img.decode();             // ждём полную декодировку
+                } else {
+                    await new Promise(res => { img.onload = img.onerror = res; });
+                }
+            } catch {}
+            if (!cancelled) setSplashReady(true);
+        })();
+        return () => { cancelled = true; };
     }, []);
 
     // 2) Когда логотип готов — грузим остальное и держим экран загрузки

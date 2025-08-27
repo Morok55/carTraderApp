@@ -8,6 +8,10 @@
     flex-direction: column;
     /* background-color: #111111; */
     background: radial-gradient(circle at top left, #2a2a2a, #030003);
+    will-change: opacity, transform;
+    contain: paint;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 /* логотип чуть выше центра */

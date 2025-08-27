@@ -38,6 +38,8 @@ button:active {
     width: 100%;
     height: 100vh;
     background: #030003; /* тот же, что и у страниц */
+    max-width: 800px;
+    margin: auto
 }
 
 /* во время перехода нижний слой не скроллится/не ловит клики */
